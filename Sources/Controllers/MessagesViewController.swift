@@ -33,6 +33,18 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIGestureRecogni
     /// The `MessagesCollectionView` managed by the messages view controller object.
     open var messagesCollectionView = MessagesCollectionView()
 
+    /// TopAnchor
+    open var collectionViewTopAnchor: NSLayoutConstraint?
+    
+    /// LeadingAnchor
+    open var collectionViewLeadingAnchor: NSLayoutConstraint?
+    
+    /// TrailingAnchor
+    open var collectionViewTrailingAnchor: NSLayoutConstraint?
+    
+    /// BottomAnchor
+    open var collectionViewBottomAnchor: NSLayoutConstraint?
+  
     /// The `InputBarAccessoryView` used as the `inputAccessoryView` in the view controller.
     open lazy var messageInputBar = InputBarAccessoryView()
 
@@ -233,10 +245,14 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIGestureRecogni
         messagesCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
         let top = messagesCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+        collectionViewTopAnchor = top
         let bottom = messagesCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        collectionViewBottomAnchor = bottom
         let leading = messagesCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
+        collectionViewLeadingAnchor = leading
         let trailing = messagesCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
-        NSLayoutConstraint.activate([top, bottom, trailing, leading])
+        collectionViewTrailingAnchor = trailing
+        NSLayoutConstraint.activate([collectionViewTopAnchor ?? NSLayoutConstraint(), collectionViewBottomAnchor ?? NSLayoutConstraint(), collectionViewLeadingAnchor ?? NSLayoutConstraint(), collectionViewTrailingAnchor ?? NSLayoutConstraint()])
     }
 
     // MARK: - Typing Indicator API
